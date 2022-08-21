@@ -67,20 +67,21 @@ void merge(item *list, int size)
 {
     for (int i = 0; i < size - 1; i++)
     {
-        for (int j = 1; j < size + 1; j++)
+        for (int j = i + 1; j < size; j++)
         {
             if (list[i].degree == list[j].degree)
             {
                 // DEGREE IS SAME -> GONNA MERGE
                 if (list[i].value <= list[j].value)
                 {
+                    printf("tady1");
                     list[i].child_list[list[i].degree] = list[j];
-                    list[j] = NULL;
+                    printf("tady3");
                 }
                 else
                 {
+                    printf("tady2");
                     list[j].child_list[list[j].degree] = list[i];
-                    list[i] = NULL;
                 }
             }
         }
@@ -90,13 +91,25 @@ void merge(item *list, int size)
 
 int main()
 {
-    int size = 10;
+    int size = 4;
+
     item *root_list = list_init(size);
-    for (int value = 1; value <= 10; value++)
+
+    for (int value = 1; value <= size - 1; value++)
     {
         insert(value, root_list, size);
     }
+
     print_root_list(root_list, size);
+
+    insert(10, root_list, size);
+    root_list->child_list[root_list->degree] = root_list[3];
+    
+    printf("tusu");
+    
+    print_root_list(root_list, size);
+    
+    
     return 0;
 }
 
